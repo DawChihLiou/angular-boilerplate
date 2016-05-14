@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/DawChihLiou/angular-boilerplate/issues"
   },
-  "homepage": "https://github.com/DawChihLiou/angular-boilerplate#readme"
+  "homepage": "https://github.com/DawChihLiou/angular-boilerplate#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }
