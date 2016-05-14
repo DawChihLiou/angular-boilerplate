@@ -1,7 +1,6 @@
-var angular = require('angular');
+var angular        = require('angular');
+var MainController = require('./home/MainController');
 
 var app = angular.module('app', []);
 
-app.controller('MainController', function ($scope) {
-  $scope.message = 'Angular works very well';
-});
+app.controller('MainController', ['$scope', MainController]);
