@@ -4,7 +4,9 @@ var connect    = require('gulp-connect');
 var browserify = require('browserify');
 var source     = require('vinyl-source-stream');
 
-// local server
+/**
+ * local server
+ */
 gulp.task('connect', function () {
   connect.server({
     root: 'public',
@@ -12,7 +14,9 @@ gulp.task('connect', function () {
   });
 });
 
-// Browserify
+/**
+ * browserify
+ */
 gulp.task('browserify', function () {
   /*
    * 1. get files
@@ -25,3 +29,17 @@ gulp.task('browserify', function () {
     .pipe(source('main.js'))
     .pipe(gulp.dest('./public/js/'));
 });
+
+
+/**
+ * watch
+ */
+// TODO: watch sass as well
+gulp.task('watch', function () {
+  gulp.watch('app/**/*.js', ['browserify']);
+});
+
+/**
+ * run 'gulp' to file default task
+ */
+gulp.task('default', ['connect', 'watch']);
