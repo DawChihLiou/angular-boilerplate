@@ -1,0 +1,24 @@
+{
+  "name": "angular-boilerplate",
+  "version": "1.0.0",
+  "description": "AngularJs, Gulp, and Browserify boilerplate that kick start development.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DawChihLiou/angular-boilerplate.git"
+  },
+  "keywords": [
+    "AngularJS",
+    "Gulp",
+    "Browserify"
+  ],
+  "author": "Daw-Chih Liou",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DawChihLiou/angular-boilerplate/issues"
+  },
+  "homepage": "https://github.com/DawChihLiou/angular-boilerplate#readme"
+}
