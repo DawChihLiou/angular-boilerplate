@@ -30,13 +30,21 @@ gulp.task('browserify', function () {
     .pipe(gulp.dest('./public/js/'));
 });
 
+/**
+ * sass
+ */
+gulp.task('sass', function () {
+  return sass('./sass/style.sass')
+    .pipe(gulp.dest('public/css'));
+ });
 
 /**
  * watch
  */
 // TODO: watch sass as well
 gulp.task('watch', function () {
-  gulp.watch('app/**/*.js', ['browserify']);
+  gulp.watch('./app/**/*.js', ['browserify']);
+  gulp.watch('./sass/style.sass', ['sass']);
 });
 
 /**
