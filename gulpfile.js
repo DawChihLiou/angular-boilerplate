@@ -3,6 +3,8 @@ var sass       = require('gulp-ruby-sass');
 var connect    = require('gulp-connect');
 var browserify = require('browserify');
 var source     = require('vinyl-source-stream');
+var uglify     = require('gulp-uglify');
+var buffer     = require('vinyl-buffer');
 
 /**
  * local server
@@ -26,7 +28,9 @@ gulp.task('browserify', function () {
    */
   return browserify('./app/app.js')
     .bundle()
-    .pipe(source('main.js'))
+    .pipe(source('bundle.js'))
+    .pipe(buffer())
+    .pipe(uglify())
     .pipe(gulp.dest('./public/js/'));
 });
 
@@ -44,7 +48,7 @@ gulp.task('sass', function () {
 // TODO: watch sass as well
 gulp.task('watch', function () {
   gulp.watch('./app/**/*.js', ['browserify']);
-  gulp.watch('./sass/style.sass', ['sass']);
+  gulp.watch('./sass/**/*.sass', ['sass']);
 });
 
 /**
