@@ -5,6 +5,7 @@ var browserify = require('browserify');
 var source     = require('vinyl-source-stream');
 var uglify     = require('gulp-uglify');
 var buffer     = require('vinyl-buffer');
+var rename     = require('gulp-rename');
 
 /**
  * local server
@@ -17,7 +18,7 @@ gulp.task('connect', function () {
 });
 
 /**
- * browserify
+ * browserify bundle + uglify
  */
 gulp.task('browserify', function () {
   /*
@@ -31,6 +32,7 @@ gulp.task('browserify', function () {
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe(uglify())
+    .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('./public/js/'));
 });
 
@@ -45,7 +47,6 @@ gulp.task('sass', function () {
 /**
  * watch
  */
-// TODO: watch sass as well
 gulp.task('watch', function () {
   gulp.watch('./app/**/*.js', ['browserify']);
   gulp.watch('./sass/**/*.sass', ['sass']);
