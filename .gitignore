@@ -35,5 +35,10 @@ bower_components
 # Optional REPL history
 .node_repl_history
 
-# Browserify bundle
-./public/js/bundle.min.js
+# sass
+.sass-cache
+
+# generated files
+publc/css/*
+public/fonts/*
+public/js/*
