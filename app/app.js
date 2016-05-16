@@ -1,5 +1,5 @@
 var angular        = require('angular');
-var MainController = require('./home/MainController');
+var MainController = require('./home/controllers/MainController');
 
 var app = angular.module('app', []);
 
