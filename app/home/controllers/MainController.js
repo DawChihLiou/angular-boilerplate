@@ -1,5 +1,5 @@
 var mainController = function ($scope) {
-  $scope.message = 'Modualized controller yay';
+  $scope.message = 'testing js modules';
 };
 
 module.exports = mainController;

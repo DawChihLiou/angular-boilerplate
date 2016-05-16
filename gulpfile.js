@@ -10,10 +10,10 @@ var bower      = require('gulp-bower');
 
 // file directories
 var config     = {
-  sassDir : './sass',
-  appDir  : './app',
-  bowerDir: './.bower_components',
-  destDir : './public'
+  sassDir : './sass/',
+  appDir  : './app/',
+  bowerDir: './.bower_components/',
+  destDir : './public/'
 }
 
 /**
@@ -22,7 +22,8 @@ var config     = {
 gulp.task('connect', function () {
   connect.server({
     root: config.destDir,
-    port: 4000
+    port: 4000,
+    livereload: true
   });
 });
 
@@ -36,27 +37,29 @@ gulp.task('browserify', function () {
    * 3. name bundled files main.js
    * 4. save main.js under ./public/js/ directory
    */
-  return browserify(config.appDir + '/app.js')
+  return browserify(config.appDir + 'app.js')
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe(uglify())
     .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest(config.destDir + '/js'));
+    .pipe(gulp.dest(config.destDir + 'js'))
+    .pipe(connect.reload());
 });
 
 /**
  * sass
  */
 gulp.task('sass', function () {
-  return sass(config.sassDir + '/style.scss', {
+  return sass(config.sassDir + 'style.scss', {
     style   : 'compressed',
      loadPath: [
       config.sassDir,
-       config.bowerDir + '/bootstrap-sass/assets/stylesheets',
-       config.bowerDir + '/font-awesome/scss',
+       config.bowerDir + 'bootstrap-sass/assets/stylesheets',
+       config.bowerDir + 'font-awesome/scss',
      ]}) 
-    .pipe(gulp.dest('public/css'));
+    .pipe(gulp.dest(config.destDir + 'css'))
+    .pipe(connect.reload());
  });
 
 /**
@@ -71,19 +74,28 @@ gulp.task('bower', function () {
  * fontawesome
  */
 gulp.task('icons', function() {
-  return gulp.src(config.bowerDir + '/font-awesome/fonts/**.*')
-    .pipe(gulp.dest(config.destDir + '/fonts'))
+  return gulp.src(config.bowerDir + 'font-awesome/fonts/**.*')
+    .pipe(gulp.dest(config.destDir + 'fonts'))
+});
+
+/**
+ * html
+ */
+gulp.task('html', function () {
+  gulp.src(config.destDir + '*.html')
+    .pipe(connect.reload());
 });
 
 /**
  * watch
  */
 gulp.task('watch', function () {
-  gulp.watch(config.appDir + '/**/*.js', ['browserify']);
-  gulp.watch(config.sassDir + '/**/*.scss', ['sass']);
+  gulp.watch([config.appDir + '**/*.html', config.destDir + '*.html'], ['html']);
+  gulp.watch(config.appDir + '**/*.js', ['browserify']);
+  gulp.watch(config.sassDir + '**/*.scss', ['sass']);
 });
 
 /**
  * run 'gulp' to file default task
  */
-gulp.task('default', ['connect', 'watch', 'bower', 'icons']);
+gulp.task('default', ['connect', 'watch', 'bower', 'icons', 'html']);
