@@ -39,6 +39,6 @@ bower_components
 .sass-cache
 
 # generated files
-public/css/*
-public/fonts/*
-public/js/*
+# public/css/*
+# public/fonts/*
+# public/js/*
