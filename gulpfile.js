@@ -82,7 +82,7 @@ gulp.task('icons', function() {
  * html
  */
 gulp.task('html', function () {
-  gulp.src(config.destDir + '*.html')
+  return gulp.src(config.destDir + '*.html')
     .pipe(connect.reload());
 });
 
